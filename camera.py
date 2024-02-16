@@ -13,7 +13,7 @@ class VideoCapture:
         self.t.start()
 
     # grab frames as soon as they are available
-    def _reader(self):
+    def run(self):
         while True:
             with self.lock:
                 ret = self.cap.grab()
