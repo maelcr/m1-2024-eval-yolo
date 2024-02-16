@@ -11,7 +11,7 @@ class Yolo:
         model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
         return model
 
-    def predict(image_a_predict):
+    def predict(image_a_predict, model):
         # Images
         for f in 'zidane.jpg', 'bus.jpg':
             torch.hub.download_url_to_file('https://ultralytics.com/images/' + f, f)  # download 2 images

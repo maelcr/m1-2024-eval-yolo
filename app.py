@@ -1,3 +1,4 @@
-def lancement_app(flux_camera, modele_yolo):
+def lancement_app(flux_camera, yolo, modele_yolo):
     while True:
-        image=flux_camera.read()
+        image_cam=flux_camera.read()
+        yolo.predict(image_cam, modele_yolo)

@@ -4,7 +4,8 @@ from app import lancement_app
 
 flux_camera=VideoCapture("camera1")
 flux_camera.run()
-modele_yolo=Yolo('ultralytics/yolov5')
+yolo=Yolo('ultralytics/yolov5')
+modele_yolo=yolo.build()
 
-lancement_app(flux_camera, modele_yolo)
+lancement_app(flux_camera, yolo, modele_yolo)
 
