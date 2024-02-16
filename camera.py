@@ -1,3 +1,4 @@
+import numpy as np
 import cv2
 import threading
 
@@ -25,3 +26,4 @@ class VideoCapture:
         with self.lock:
             _, frame = self.cap.retrieve()
         return frame
+        
