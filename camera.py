@@ -8,7 +8,7 @@ class VideoCapture:
     def __init__(self, name):
         self.cap = cv2.VideoCapture(name)
         self.lock = threading.Lock()
-        self.t = threading.Thread(target=self._reader)
+        self.t = threading.Thread(target=self.run)
         self.t.daemon = True
         self.t.start()
 
@@ -17,6 +17,9 @@ class VideoCapture:
         while True:
             with self.lock:
                 ret = self.cap.grab()
+            """if ret:
+                assert not isinstance(frame,type(None)), 'frame not found'
+            """
             #ret : si plus de flux arrete la boucle
             if not ret:
                 break
