@@ -1,32 +1,40 @@
-import numpy as np
-import cv2
 import threading
+import cv2 as cv
 
 
-# bufferless VideoCapture Camera_Video
-class VideoCapture:
-    def __init__(self, name):
-        self.cap = cv2.VideoCapture(name)
-        self.lock = threading.Lock()
-        self.t = threading.Thread(target=self.run)
-        self.t.daemon = True
-        self.t.start()
+class Camera(threading.Thread):
+    def __init__(self, vid, framerate) -> None:
+        """
+        Initialise les parametres
+        """
+        super().__init__()
 
-    # grab frames as soon as they are available
+        self.vid = vid
+        self.framerate = framerate
+        self.last_img = None
+
+        t = threading.Thread(target=self.run)
+        t.daemon = True
+        t.start()
+
     def run(self):
+        """
+        Récupere en continu le flux vidéo pour sotcker la derniere image en date
+        """
         while True:
-            with self.lock:
-                ret = self.cap.grab()
-            """if ret:
-                assert not isinstance(frame,type(None)), 'frame not found'
-            """
-            #ret : si plus de flux arrete la boucle
+            ret, self.last_img = self.vid.read()
             if not ret:
                 break
 
-    # retrieve latest frame
     def read(self):
-        with self.lock:
-            _, frame = self.cap.retrieve()
-        return frame
-        
+        """
+        Input : rien
+        Renturn : La derniere image du flux vidéo
+        """
+        return self.last_img
+    
+    def clean(self):
+        """
+        appeler à la fin du programe, remet la derniere image à None
+        """
+        self.last_img=None
