@@ -4,6 +4,8 @@ Sans utiliser docker, implémenter le programme python permettant d'afficher et 
 
 Programme à envoyer avant la fin du cours à cvrc.valentin@gmail.com
 
+**Ne pas inclure la version locale de YoloV5 dans le programme envoyé par mail**
+
 
 ### Classe Camera (/5)
 - Hérite de `threading.Thread` pour paralléliser la capture d'images
